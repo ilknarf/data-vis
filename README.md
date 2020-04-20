@@ -4,4 +4,5 @@ Using generator functions to produce pair swaps for sorting algorithms
 
 - [x] Quicksort (middle partition) generator
 - [x] Selection sort generator
-- [ ] Use cairo to draw SVG
+- [ ] Merge sort generator
+- [x] Use cairo to draw SVG

@@ -1,8 +1,12 @@
-"""quicksort that returns swap pairs"""
+"""quicksort that yields swap pairs"""
 
-def quicksort(l: list, lo: int, hi: int):
-    """generator that returns pairs of index swaps"""
 
+def quicksort(l: list, lo: int = -1, hi: int = -1): 
+    """generator that yields pairs of index swaps"""
+
+    if lo == -1:
+        lo = 0
+        hi = len(l)
     # partition middle element (lit says that median is theoretically best)
     i = (lo + hi) // 2
     pivot = l[i]
@@ -19,17 +23,17 @@ def quicksort(l: list, lo: int, hi: int):
                 left_swap = v
                 break
         
-        for j in range(hi - 1,i, -1):
+        for j in range(hi - 1, i, -1):
             if l[j] < pivot:
                 right_swap = j
                 break
 
         # if all items from both swapped, partition success
-        if left_swap == None and right_swap == None:
+        if left_swap is None and right_swap is None:
             break
 
         # now lomuto to finish remaining items
-        elif left_swap == None:
+        elif left_swap is None:
             j = right - 1
             for k in reversed(range(left, right)):
                 if l[k] > pivot:
@@ -46,7 +50,7 @@ def quicksort(l: list, lo: int, hi: int):
             break
 
         # lomuto for other side
-        elif right_swap == None:
+        elif right_swap is None:
             j = left
             for k in range(left, right):
                 if l[k] < pivot:
@@ -73,13 +77,13 @@ def quicksort(l: list, lo: int, hi: int):
     if hi - (i + 1) > 1:    
         yield from quicksort(l, i+1, hi)
 
+
 if __name__ == "__main__":
     import random
     l = [random.randint(0, 2000) for _ in range(0, 1000)]
     s = sorted(l)
     print(l)
-    for i in quicksort(l, 0, len(l)):
+    for i in quicksort(l):
         print(i)
     print(l)
-    print(l == s)
-    
+    print(f'sorted? {l == s}')
