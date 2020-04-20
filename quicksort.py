@@ -27,6 +27,7 @@ def quicksort(l: list, lo: int, hi: int):
         # if all items from both swapped, partition success
         if left_swap == None and right_swap == None:
             break
+
         # now lomuto to finish remaining items
         elif left_swap == None:
             j = right - 1
@@ -43,6 +44,8 @@ def quicksort(l: list, lo: int, hi: int):
 
             i = j
             break
+
+        # lomuto for other side
         elif right_swap == None:
             j = left
             for k in range(left, right):
@@ -72,9 +75,11 @@ def quicksort(l: list, lo: int, hi: int):
 
 if __name__ == "__main__":
     import random
-    l = [random.randint(0, 50) for _ in range(0, 50)]
-
+    l = [random.randint(0, 2000) for _ in range(0, 1000)]
+    s = sorted(l)
     print(l)
     for i in quicksort(l, 0, len(l)):
         print(i)
     print(l)
+    print(l == s)
+    
